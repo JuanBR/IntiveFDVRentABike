@@ -3,7 +3,7 @@ package intiveFDV.dto;
 import java.io.Serializable;
 import java.util.List;
 
-import intiveFDV.domain.PromocionType;
+import intiveFDV.domain.PromotionType;
 import intiveFDV.domain.TimeUnit;
 
 public class RentRequestDto  implements Serializable {

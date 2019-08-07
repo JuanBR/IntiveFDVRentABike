@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import intiveFDV.domain.Bike;
 import intiveFDV.domain.RentItem;
 import intiveFDV.domain.RentType;
-import intiveFDV.dto.PromocionalRentRequestDto;
+import intiveFDV.dto.PromotionalRentRequestDto;
 import intiveFDV.exception.NotEnoughBikesException;
 import intiveFDV.listener.RentContractMessageListener;
 import intiveFDV.repositories.RentContractRepository;
@@ -33,7 +33,7 @@ public class RentItemServiceImpl implements RentItemService {
 
 	
 	@Override
-	public List<RentItem> createRentItems(PromocionalRentRequestDto rentRequest) {
+	public List<RentItem> createRentItems(PromotionalRentRequestDto rentRequest) {
 		try{
 			return tryToCreateRentItems(rentRequest);
 		}catch (NotEnoughBikesException e) {
@@ -46,7 +46,7 @@ public class RentItemServiceImpl implements RentItemService {
 		
 	}
 
-	private List<RentItem> tryToCreateRentItems(PromocionalRentRequestDto rentRequest) {
+	private List<RentItem> tryToCreateRentItems(PromotionalRentRequestDto rentRequest) {
 		List<RentItem> list = new ArrayList<RentItem>();
 		List<Bike> bikesAvailabeForRent = bikeService.givmeBikes(rentRequest.getRentedTime().size());
 		List<RentType> rentTypes = rentedTimeService.getRentedTime(rentRequest.getRentedTime());

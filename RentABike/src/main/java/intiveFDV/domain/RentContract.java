@@ -28,9 +28,9 @@ public class RentContract {
 	private Double finalPrice;
 	@OneToMany(targetEntity=RentItem.class, mappedBy="rentContract")
 	private List<RentItem> rentedItems;
-	@OneToOne(targetEntity=Promocion.class, optional = true)
-	@JoinColumn(name="promocionId")
-	private Promocion promocion;
+	@OneToOne(targetEntity=Promotion.class, optional = true)
+	@JoinColumn(name="promotionId")
+	private Promotion promotion;
 	
 	public Long getId() {
 		return id;
@@ -68,26 +68,26 @@ public class RentContract {
 	public void setRentedItems(List<RentItem> rentedItems) {
 		this.rentedItems = rentedItems;
 	}
-	public Promocion getPromocion() {
-		return promocion;
+	public Promotion getPromotion() {
+		return promotion;
 	}
-	public void setPromocion(Promocion promocion) {
-		this.promocion = promocion;
+	public void setPromotion(Promotion promotion) {
+		this.promotion = promotion;
 	}
 	
-	public RentContract(String user, List<RentItem> rentedItems, Promocion promocion) {
+	public RentContract(String user, List<RentItem> rentedItems, Promotion promotion) {
 		super();
 		this.userId = user;
 		this.rentedItems = rentedItems;
-		this.promocion = promocion;
+		this.promotion = promotion;
 		calculateFinalPrice();
 	}
 	private void calculateFinalPrice() {
 		this.totalPrice = 0d;
-		this.rentedItems.stream().forEach(rentItem -> {
-			this.totalPrice += rentItem.getUnitOfRentType() * rentItem.getRentedTyme().getChargePerTymeUnit(); 
-		});
-		this.totalDiscount = this.totalPrice * (this.getPromocion() !=null ? this.getPromocion().getDiscount() : 0);
+		this.totalPrice = this.rentedItems.stream()
+				.reduce(0d, (subtotal, rentItem) -> 
+				subtotal + rentItem.getUnitOfRentType() * rentItem.getRentedTyme().getChargePerTymeUnit(), Double::sum);
+		this.totalDiscount = this.totalPrice * (this.getPromotion() !=null ? this.getPromotion().getDiscount() : 0);
 		this.finalPrice = this.totalPrice - this.totalDiscount;
 		
 	}

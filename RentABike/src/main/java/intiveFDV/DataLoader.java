@@ -3,39 +3,39 @@ package intiveFDV;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.ApplicationScope;
 
 import intiveFDV.domain.Bike;
 import intiveFDV.domain.BikeStatus;
-import intiveFDV.domain.Promocion;
-import intiveFDV.domain.PromocionType;
+import intiveFDV.domain.Promotion;
+import intiveFDV.domain.PromotionType;
 import intiveFDV.domain.RentType;
 import intiveFDV.domain.TimeUnit;
 import intiveFDV.repositories.BikeRepository;
-import intiveFDV.repositories.PromocionRepository;
+import intiveFDV.repositories.PromotionRepository;
 import intiveFDV.repositories.RentContractRepository;
 import intiveFDV.repositories.RentTypeRepository;
 
 @Component
+@Profile("!test")
 public class DataLoader implements ApplicationRunner {
-	
 	@Autowired
 	private BikeRepository bikeRepository;
 	@Autowired
-	private PromocionRepository promocionRepository;
-	@Autowired
-	private RentContractRepository rentContractRepository;
+	private PromotionRepository promotionRepository;
 	@Autowired
 	private RentTypeRepository rentTypeRepository;
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		Bike bike1 = new Bike(BikeStatus.AVALAIBLE);
-    	Bike bike2 = new Bike(BikeStatus.AVALAIBLE);
-    	Bike bike3 = new Bike(BikeStatus.AVALAIBLE);
-    	Bike bike4 = new Bike(BikeStatus.AVALAIBLE);
-    	Bike bike5 = new Bike(BikeStatus.AVALAIBLE);
-    	Bike bike6 = new Bike(BikeStatus.AVALAIBLE);
+		Bike bike1 = new Bike(BikeStatus.AVAILABLE);
+    	Bike bike2 = new Bike(BikeStatus.AVAILABLE);
+    	Bike bike3 = new Bike(BikeStatus.AVAILABLE);
+    	Bike bike4 = new Bike(BikeStatus.AVAILABLE);
+    	Bike bike5 = new Bike(BikeStatus.AVAILABLE);
+    	Bike bike6 = new Bike(BikeStatus.AVAILABLE);
 		
     	bikeRepository.save(bike1);
     	bikeRepository.save(bike2);
@@ -45,8 +45,8 @@ public class DataLoader implements ApplicationRunner {
     	bikeRepository.save(bike6);
     	
     	
-    	Promocion promocion = new Promocion(PromocionType.FAMILY_RENT, 0.3D);
-    	promocionRepository.save(promocion);
+    	Promotion promotion = new Promotion(PromotionType.FAMILY_RENT, 0.3D);
+    	promotionRepository.save(promotion);
     	
     	RentType rentTypeHour = new RentType(TimeUnit.HOUR,0.4D);
     	RentType rentTypeDay = new RentType(TimeUnit.DAY,0.3D);

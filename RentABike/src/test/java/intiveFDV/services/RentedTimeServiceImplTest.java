@@ -24,12 +24,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import intiveFDV.domain.Bike;
 import intiveFDV.domain.BikeStatus;
-import intiveFDV.domain.Promocion;
-import intiveFDV.domain.PromocionType;
+import intiveFDV.domain.Promotion;
+import intiveFDV.domain.PromotionType;
 import intiveFDV.domain.RentItem;
 import intiveFDV.domain.RentType;
 import intiveFDV.domain.TimeUnit;
-import intiveFDV.dto.PromocionalRentRequestDto;
+import intiveFDV.dto.PromotionalRentRequestDto;
 import intiveFDV.dto.RentedTimeRequestDto;
 import intiveFDV.repositories.RentTypeRepository;
 

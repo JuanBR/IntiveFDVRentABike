@@ -35,7 +35,7 @@ public class BikeRepositoryTest {
     @Test
     public void whenFindById_thenReturnBike() {
     	// given
-    	Bike bike = new Bike(BikeStatus.AVALAIBLE);
+    	Bike bike = new Bike(BikeStatus.AVAILABLE);
         entityManager.persist(bike);
         entityManager.flush();
      
@@ -49,8 +49,8 @@ public class BikeRepositoryTest {
     @Test
     public void whenFindAll_thenReturnBikeList() {
     	// given
-    	Bike bike1 = new Bike(BikeStatus.AVALAIBLE);
-    	Bike bike2 = new Bike(BikeStatus.AVALAIBLE);
+    	Bike bike1 = new Bike(BikeStatus.AVAILABLE);
+    	Bike bike2 = new Bike(BikeStatus.AVAILABLE);
     	List<Bike> listbike = Arrays.asList(bike1, bike2);
         entityManager.persist(bike1);
         entityManager.persist(bike2);
@@ -66,7 +66,7 @@ public class BikeRepositoryTest {
     @Test
     public void whenSave_thenBikeExist() {
     	// given
-    	Bike bike1 = new Bike(BikeStatus.AVALAIBLE);
+    	Bike bike1 = new Bike(BikeStatus.AVAILABLE);
         // when
         bikeRepositoryRepository.save(bike1);
         Bike found = entityManager.find(Bike.class, bike1.getId());

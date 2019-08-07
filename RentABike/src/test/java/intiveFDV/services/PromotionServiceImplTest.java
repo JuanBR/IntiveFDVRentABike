@@ -23,46 +23,46 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import intiveFDV.domain.Bike;
 import intiveFDV.domain.BikeStatus;
-import intiveFDV.domain.Promocion;
-import intiveFDV.domain.PromocionType;
-import intiveFDV.domain.Promocion;
+import intiveFDV.domain.Promotion;
+import intiveFDV.domain.PromotionType;
+import intiveFDV.domain.Promotion;
 import intiveFDV.domain.RentType;
 import intiveFDV.domain.TimeUnit;
-import intiveFDV.dto.PromocionalRentRequestDto;
+import intiveFDV.dto.PromotionalRentRequestDto;
 import intiveFDV.dto.RentedTimeRequestDto;
-import intiveFDV.repositories.PromocionRepository;
+import intiveFDV.repositories.PromotionRepository;
 
 @RunWith(SpringRunner.class)
-public class PromocionServiceImplTest {
+public class PromotionServiceImplTest {
 
 	
 	@TestConfiguration
-	static class PromocionServiceImplTestContextConfiguration {
+	static class PromotionServiceImplTestContextConfiguration {
 		@Bean
-	    public PromocionService PromocionService() {
-			return new PromocionServiceImpl();
+	    public PromotionService PromotionService() {
+			return new PromotionServiceImpl();
 	    }
 	}
 	
 	@Autowired
-	private PromocionService promocionService;
+	private PromotionService promotionService;
 	
 	@MockBean
-	PromocionRepository promocionRepository; 
+	PromotionRepository promotionRepository; 
 	
 	
-	  Promocion promocion;
+	  Promotion promotion;
 		
 	@Before
 	public void setUp() {
-		promocion = new Promocion(PromocionType.FAMILY_RENT, 0.3D);
+		promotion = new Promotion(PromotionType.FAMILY_RENT, 0.3D);
 	}
 	
 	
 	@Test
-	public void getPromocion() {
-		given(promocionRepository.findByType(Mockito.any(PromocionType.class))).willReturn(promocion);
-		assertThat(promocionService.getPromocion(PromocionType.FAMILY_RENT).getDiscount()).isEqualTo(promocion.getDiscount());
+	public void getPromotion() {
+		given(promotionRepository.findByType(Mockito.any(PromotionType.class))).willReturn(promotion);
+		assertThat(promotionService.getPromotion(PromotionType.FAMILY_RENT).getDiscount()).isEqualTo(promotion.getDiscount());
 	}
 	
 	

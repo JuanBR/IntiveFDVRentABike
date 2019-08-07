@@ -3,7 +3,7 @@ package intiveFDV.services;
 import java.util.List;
 
 import intiveFDV.domain.RentContract;
-import intiveFDV.dto.PromocionalRentRequestDto;
+import intiveFDV.dto.PromotionalRentRequestDto;
 import intiveFDV.dto.RentRequestDto;
 
 public interface RentABikeService {
@@ -12,6 +12,6 @@ public interface RentABikeService {
 
 	void rentABike(RentRequestDto request);
 
-	void rentABikeWithAPromocion(PromocionalRentRequestDto request);
+	void rentABikeWithAPromotion(PromotionalRentRequestDto request);
 
 }

@@ -32,6 +32,15 @@ public class RentedTimeRequestDto implements Serializable {
 		this.unit = unit;
 	}
 	
+	public static RentedTimeRequestDto rentedForDay(Integer unit) {
+		return new RentedTimeRequestDto(TimeUnit.DAY, unit);
+	}
 	
+	public static RentedTimeRequestDto rentedForHour(Integer unit) {
+		return new RentedTimeRequestDto(TimeUnit.HOUR, unit);
+	}
 	
+	public static RentedTimeRequestDto rentedForWeek(Integer unit) {
+		return new RentedTimeRequestDto(TimeUnit.WEEK, unit);
+	}
 }

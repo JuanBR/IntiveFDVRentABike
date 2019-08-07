@@ -1,5 +1,5 @@
 package intiveFDV.domain;
 
-public enum PromocionType {
+public enum PromotionType {
 	FAMILY_RENT
 }

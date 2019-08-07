@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import intiveFDV.RentABikeApplication;
 import intiveFDV.domain.RentContract;
-import intiveFDV.dto.PromocionalRentRequestDto;
+import intiveFDV.dto.PromotionalRentRequestDto;
 import intiveFDV.dto.RentRequestDto;
 import intiveFDV.repositories.RentContractRepository;
 
@@ -32,17 +32,17 @@ public class RentABikeServiceImpl implements RentABikeService {
 	}
 	
 	
-	private void sendRentContractMessage(PromocionalRentRequestDto promocionalRentRequest) {
-		Map<String, PromocionalRentRequestDto> actionmap = new HashMap<>();
-	    actionmap.put("promocionalRentRequest", promocionalRentRequest);
-	    log.info("Sending the rent with promocion request through queue message");
+	private void sendRentContractMessage(PromotionalRentRequestDto promotionalRentRequest) {
+		Map<String, PromotionalRentRequestDto> actionmap = new HashMap<>();
+	    actionmap.put("promotionalRentRequest", promotionalRentRequest);
+	    log.info("Sending the rent with promotion request through queue message");
 	    rabbitTemplate.convertAndSend(RentABikeApplication.FDV_MESSAGE_QUEUE, actionmap);
 	}
 	
 	private void sendRentContractMessage(RentRequestDto rentRequest) {
-		Map<String, PromocionalRentRequestDto> actionmap = new HashMap<>();
-		PromocionalRentRequestDto request = PromocionalRentRequestDto.castToPromocionalRentRequestDto(rentRequest) ;
-	    actionmap.put("promocionalRentRequest", request);
+		Map<String, PromotionalRentRequestDto> actionmap = new HashMap<>();
+		PromotionalRentRequestDto request = PromotionalRentRequestDto.castToPromotionalRentRequestDto(rentRequest) ;
+	    actionmap.put("promotionalRentRequest", request);
 	    log.info("Sending the rent request through queue message");
 	    rabbitTemplate.convertAndSend(RentABikeApplication.FDV_MESSAGE_QUEUE, actionmap);
 	}
@@ -54,7 +54,7 @@ public class RentABikeServiceImpl implements RentABikeService {
 
 
 	@Override
-	public void rentABikeWithAPromocion(PromocionalRentRequestDto request) {
+	public void rentABikeWithAPromotion(PromotionalRentRequestDto request) {
 		sendRentContractMessage(request);
 	}
 

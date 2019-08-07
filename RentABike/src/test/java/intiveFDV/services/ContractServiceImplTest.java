@@ -31,13 +31,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import intiveFDV.domain.Bike;
 import intiveFDV.domain.BikeStatus;
-import intiveFDV.domain.Promocion;
-import intiveFDV.domain.PromocionType;
+import intiveFDV.domain.Promotion;
+import intiveFDV.domain.PromotionType;
 import intiveFDV.domain.RentContract;
 import intiveFDV.domain.RentItem;
 import intiveFDV.domain.RentType;
 import intiveFDV.domain.TimeUnit;
-import intiveFDV.dto.PromocionalRentRequestDto;
+import intiveFDV.dto.PromotionalRentRequestDto;
 import intiveFDV.dto.RentedTimeRequestDto;
 import intiveFDV.repositories.RentContractRepository;
 
@@ -58,37 +58,37 @@ public class ContractServiceImplTest {
 	@MockBean
 	RentItemService rentItemService;
 	@MockBean
-	PromocionService promocionService;
+	PromotionService promotionService;
 	@MockBean
 	RentContractRepository rentContractRepository; 
 
 	  List<RentItem> rentItems;
-	  Promocion promocion;
+	  Promotion promotion;
 	  Bike bike;
 	  RentType rentType;
 	  RentItem rentItem;
-	  PromocionalRentRequestDto rentRequest;
+	  PromotionalRentRequestDto rentRequest;
 		
 	@Before
 	public void setUp() {
-		bike = new Bike(BikeStatus.AVALAIBLE);
+		bike = new Bike(BikeStatus.AVAILABLE);
 		rentType = new RentType(TimeUnit.DAY, 12.0D);
 		rentItem = new RentItem(bike, rentType, 3);
 		rentItems = Arrays.asList(rentItem );
-		promocion = new Promocion(PromocionType.FAMILY_RENT, 0.3D);
-		rentRequest = new PromocionalRentRequestDto("user", Arrays.asList(new RentedTimeRequestDto(TimeUnit.DAY, 3)), 
-				PromocionType.FAMILY_RENT);
+		promotion = new Promotion(PromotionType.FAMILY_RENT, 0.3D);
+		rentRequest = new PromotionalRentRequestDto("user", Arrays.asList(new RentedTimeRequestDto(TimeUnit.DAY, 3)), 
+				PromotionType.FAMILY_RENT);
 	}
 	
 	@Test
 	public void createARentContract() {
 		//given
-		given(rentItemService.createRentItems(Mockito.any(PromocionalRentRequestDto.class)))
+		given(rentItemService.createRentItems(Mockito.any(PromotionalRentRequestDto.class)))
 		.willReturn(rentItems);
-		given(promocionService.getPromocion(Mockito.any(PromocionType.class)))
-		.willReturn(promocion);
+		given(promotionService.getPromotion(Mockito.any(PromotionType.class)))
+		.willReturn(promotion);
 		given(rentContractRepository.save(Mockito.any(RentContract.class)))
-		.willReturn(new RentContract("user", rentItems, promocion));
+		.willReturn(new RentContract("user", rentItems, promotion));
 		
 		contractService.createARentContract(rentRequest);
 		

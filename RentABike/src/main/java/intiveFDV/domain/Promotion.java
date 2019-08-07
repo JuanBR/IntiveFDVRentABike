@@ -7,11 +7,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Promocion")
-public class Promocion {
+@Table(name = "Promotion")
+public class Promotion {
 
 	private Long id;
-	private PromocionType type;
+	private PromotionType type;
 	private Double discount;
 	
 	@Id
@@ -22,10 +22,10 @@ public class Promocion {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public PromocionType getType() {
+	public PromotionType getType() {
 		return type;
 	}
-	public void setType(PromocionType name) {
+	public void setType(PromotionType name) {
 		this.type = name;
 	}
 	public Double getDiscount() {
@@ -34,12 +34,12 @@ public class Promocion {
 	public void setDiscount(Double discount) {
 		this.discount = discount;
 	}
-	public Promocion(PromocionType type, Double discount) {
+	public Promotion(PromotionType type, Double discount) {
 		super();
 		this.type = type;
 		this.discount = discount;
 	}
-	public Promocion() {
+	public Promotion() {
 		super();
 	}
 	

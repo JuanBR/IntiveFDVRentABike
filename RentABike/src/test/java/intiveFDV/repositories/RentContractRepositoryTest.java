@@ -16,8 +16,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import intiveFDV.domain.Bike;
 import intiveFDV.domain.BikeStatus;
-import intiveFDV.domain.Promocion;
-import intiveFDV.domain.PromocionType;
+import intiveFDV.domain.Promotion;
+import intiveFDV.domain.PromotionType;
 import intiveFDV.domain.RentContract;
 import intiveFDV.domain.RentItem;
 import intiveFDV.domain.RentType;
@@ -35,29 +35,29 @@ public class RentContractRepositoryTest {
     
     
     List<RentItem> rentItems;
-    Promocion promocion;
+    Promotion promotion;
     Bike bike;
     RentType rentType;
     RentItem rentItem;
 	
 	@Before
 	public void setUp() {
-		bike = new Bike(BikeStatus.AVALAIBLE);
+		bike = new Bike(BikeStatus.AVAILABLE);
 		rentType = new RentType(TimeUnit.DAY, 12.0D);
 		rentItem = new RentItem(bike, rentType, 3);
 		rentItems = Arrays.asList(rentItem );
-		promocion = new Promocion(PromocionType.FAMILY_RENT, 0.3D);
+		promotion = new Promotion(PromotionType.FAMILY_RENT, 0.3D);
 		entityManager.persistAndFlush(rentType);
 		entityManager.persistAndFlush(bike);
 		entityManager.persistAndFlush(rentItem);
-		entityManager.persistAndFlush(promocion);
+		entityManager.persistAndFlush(promotion);
 	}
     
 
     @Test
     public void whenFindByDay_thenReturnRentContract() {
     	// given
-    	RentContract rentContract = new RentContract("0AD", rentItems, promocion);
+    	RentContract rentContract = new RentContract("0AD", rentItems, promotion);
         entityManager.persist(rentContract);
         entityManager.flush();
      
@@ -71,8 +71,8 @@ public class RentContractRepositoryTest {
     @Test
     public void whenFindAll_thenReturnRentContractList() {
     	// given
-    	RentContract rentContract1 = new RentContract("0AD", rentItems, promocion);
-    	RentContract rentContract2 = new RentContract("1AD", rentItems, promocion);
+    	RentContract rentContract1 = new RentContract("0AD", rentItems, promotion);
+    	RentContract rentContract2 = new RentContract("1AD", rentItems, promotion);
     	List<RentContract> listrentContract = Arrays.asList(rentContract1, rentContract2);
         entityManager.persist(rentContract1);
         entityManager.persist(rentContract2);
@@ -88,7 +88,7 @@ public class RentContractRepositoryTest {
     @Test
     public void whenSave_thenRentContractExist() {
     	// given
-    	RentContract rentContract1 = new RentContract("0AD", rentItems, promocion);
+    	RentContract rentContract1 = new RentContract("0AD", rentItems, promotion);
         // when
         RentContractRepository.save(rentContract1);
         RentContract found = entityManager.find(RentContract.class, rentContract1.getId());

@@ -1,17 +1,9 @@
 package intiveFDV.listener;
 
-import static org.assertj.core.api.Assertions.anyOf;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.CoreMatchers.any;
-import static org.mockito.BDDMockito.given;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.hibernate.boot.model.source.spi.AnyDiscriminatorSource;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,15 +14,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-
-import intiveFDV.domain.Bike;
-import intiveFDV.domain.BikeStatus;
-import intiveFDV.domain.Promocion;
-import intiveFDV.domain.PromocionType;
-import intiveFDV.domain.RentItem;
-import intiveFDV.domain.RentType;
-import intiveFDV.domain.TimeUnit;
-import intiveFDV.dto.PromocionalRentRequestDto;
+import intiveFDV.domain.PromotionType;
+import intiveFDV.dto.PromotionalRentRequestDto;
 import intiveFDV.dto.RentedTimeRequestDto;
 import intiveFDV.services.ContractService;
 
@@ -52,22 +37,22 @@ public class RentContractMessageListenerTest {
 	ContractService contractService;
 	
 	
-	PromocionalRentRequestDto rentRequest;
+	PromotionalRentRequestDto rentRequest;
 		
 	@Before
 	public void setUp() {
-		rentRequest = new PromocionalRentRequestDto("user", Arrays.asList(new RentedTimeRequestDto(TimeUnit.DAY, 3)), 
-				PromocionType.FAMILY_RENT);
+		rentRequest = new PromotionalRentRequestDto("user", Arrays.asList(RentedTimeRequestDto.rentedForDay(3)), 
+				PromotionType.FAMILY_RENT);
 	}
 	
 	@Test
 	 public void receiveMessage() {
-		 Map<String, PromocionalRentRequestDto> message = new HashMap<>();
-		 message.put("promocionalRentRequestDto", rentRequest);
+		 Map<String, PromotionalRentRequestDto> message = new HashMap<String, PromotionalRentRequestDto>();
+		 message.put("promotionalRentRequest", rentRequest);
 		 
-		 Mockito.doNothing().when(contractService).createARentContract(Mockito.any(PromocionalRentRequestDto.class));
+		 Mockito.doNothing().when(contractService).createARentContract(Mockito.any(PromotionalRentRequestDto.class));
 		 rentContractMessageListener.receiveMessage(message);
-		 Mockito.verify(contractService, Mockito.times(1)).createARentContract(Mockito.any(PromocionalRentRequestDto.class));
+		 Mockito.verify(contractService, Mockito.times(1)).createARentContract(Mockito.any(PromotionalRentRequestDto.class));
 	  	} 
 	
 }
